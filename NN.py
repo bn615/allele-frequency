@@ -93,7 +93,7 @@ class ABODataset(Dataset):
 
 class ABONN(torch.nn.Module):
     # Simple NN with 2 hidden layers
-    # input(4) -> hidden(16) -> hidden(16) -> output(3)
+    # input(4) -> hidden(32) -> hidden(32) -> output(3)
     def __init__(self, input_size = 4, hidden_size: int = 32):
         super().__init__()
         layers = []
@@ -110,6 +110,47 @@ class ABONN(torch.nn.Module):
 
     def forward(self, x):
         return self.net(x)
+    
+class ABONN_Dropout(torch.nn.Module):
+    def __init__(self, input_size=4, hidden_size=32, dropout_rate=0.2):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(input_size, hidden_size),
+            nn.ReLU(),
+            nn.Dropout(dropout_rate),  # Add dropout
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(),
+            nn.Dropout(dropout_rate),  # Add dropout
+            nn.Linear(hidden_size, 3),
+            nn.Softmax(dim=1)
+        )
+    
+    def forward(self, x):
+        return self.net(x)
+    
+    def predict_with_uncertainty(self, x, n_samples=100):
+        """Get mean and confidence intervals via MC Dropout"""
+        self.train()  # Keep dropout active!
+        predictions = []
+        
+        with torch.no_grad():
+            for _ in range(n_samples):
+                pred = self.forward(x)
+                predictions.append(pred.numpy())
+        
+        predictions = np.array(predictions)  # Shape: (n_samples, batch_size, 3)
+        
+        mean = predictions.mean(axis=0)
+        std = predictions.std(axis=0)
+        ci_lower = np.percentile(predictions, 2.5, axis=0)
+        ci_upper = np.percentile(predictions, 97.5, axis=0)
+        
+        return {
+            'mean': mean,
+            'std': std,
+            'ci_lower': ci_lower,
+            'ci_upper': ci_upper
+        }
 
 
 class ABOTrainer:

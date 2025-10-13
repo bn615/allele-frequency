@@ -1,0 +1,53 @@
+EM Method:
+  Computational Efficiency: 0.032 ms
+
+  Estimates (mean +/- std):
+    p: 0.2279 +/- 0.0000
+    q: 0.0697 +/- 0.0000
+    r: 0.7024 +/- 0.0000
+
+  95% Confidence Intervals:
+    p: [0.2279, 0.2279]
+    q: [0.0697, 0.0697]
+    r: [0.7024, 0.7024]
+
+  Statistical Efficiency (variance, lower is better):
+    p: 0.000000
+    q: 0.000000
+    r: 0.000000
+
+NR Method:
+  Computational Efficiency: 3.241 ms
+
+  Estimates (mean +/- std):
+    p: 0.2279 +/- 0.0000
+    q: 0.0697 +/- 0.0000
+    r: 0.7024 +/- 0.0000
+
+  95% Confidence Intervals:
+    p: [0.2279, 0.2279]
+    q: [0.0697, 0.0697]
+    r: [0.7024, 0.7024]
+
+  Statistical Efficiency (variance, lower is better):
+    p: 0.000000
+    q: 0.000000
+    r: 0.000000
+
+NN Method:
+  Computational Efficiency: 0.287 ms
+
+  Estimates (mean +/- std):
+    p: 0.2343 +/- 0.0000
+    q: 0.0658 +/- 0.0000
+    r: 0.6999 +/- 0.0000
+
+  95% Confidence Intervals:
+    p: [0.2343, 0.2343]
+    q: [0.0658, 0.0658]
+    r: [0.6999, 0.6999]
+
+  Statistical Efficiency (variance, lower is better):
+    p: 0.000000
+    q: 0.000000
+    r: 0.000000
