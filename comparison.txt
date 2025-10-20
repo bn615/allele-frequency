@@ -1,53 +1,101 @@
+================================================================================
+COMPARISON RESULTS
+================================================================================
+
 EM Method:
-  Computational Efficiency: 0.032 ms
+  Computational Efficiency: 0.027 ms
 
   Estimates (mean +/- std):
-    p: 0.2279 +/- 0.0000
-    q: 0.0697 +/- 0.0000
-    r: 0.7024 +/- 0.0000
+    p: 0.2276 +/- 0.0141
+    q: 0.0697 +/- 0.0078
+    r: 0.7027 +/- 0.0166
 
   95% Confidence Intervals:
-    p: [0.2279, 0.2279]
-    q: [0.0697, 0.0697]
-    r: [0.7024, 0.7024]
+    p: [0.2007, 0.2558]
+    q: [0.0552, 0.0867]
+    r: [0.6705, 0.7350]
 
   Statistical Efficiency (variance, lower is better):
-    p: 0.000000
-    q: 0.000000
-    r: 0.000000
+    p: 0.000198
+    q: 0.000060
+    r: 0.000275
 
 NR Method:
-  Computational Efficiency: 3.241 ms
+  Computational Efficiency: 2.585 ms
 
   Estimates (mean +/- std):
-    p: 0.2279 +/- 0.0000
-    q: 0.0697 +/- 0.0000
-    r: 0.7024 +/- 0.0000
+    p: 0.2276 +/- 0.0141
+    q: 0.0697 +/- 0.0078
+    r: 0.7027 +/- 0.0166
 
   95% Confidence Intervals:
-    p: [0.2279, 0.2279]
-    q: [0.0697, 0.0697]
-    r: [0.7024, 0.7024]
+    p: [0.2007, 0.2558]
+    q: [0.0552, 0.0867]
+    r: [0.6705, 0.7350]
 
   Statistical Efficiency (variance, lower is better):
-    p: 0.000000
-    q: 0.000000
-    r: 0.000000
+    p: 0.000198
+    q: 0.000060
+    r: 0.000275
 
 NN Method:
-  Computational Efficiency: 0.287 ms
+  Computational Efficiency: 0.201 ms
 
   Estimates (mean +/- std):
-    p: 0.2343 +/- 0.0000
-    q: 0.0658 +/- 0.0000
-    r: 0.6999 +/- 0.0000
+    p: 0.2305 +/- 0.0132
+    q: 0.0678 +/- 0.0064
+    r: 0.7017 +/- 0.0158
 
   95% Confidence Intervals:
-    p: [0.2343, 0.2343]
-    q: [0.0658, 0.0658]
-    r: [0.6999, 0.6999]
+    p: [0.2051, 0.2574]
+    q: [0.0532, 0.0812]
+    r: [0.6710, 0.7325]
 
   Statistical Efficiency (variance, lower is better):
-    p: 0.000000
-    q: 0.000000
-    r: 0.000000
+    p: 0.000175
+    q: 0.000042
+    r: 0.000249
+
+Distribution: realistic
+Sample size: 544
+Bootstrap resamples: 100
+Simulation replicates: 50
+Confidence level: 95.0%
+
+================================================================================
+COVERAGE PROBABILITY RESULTS (should be ~95%)
+================================================================================
+
+EM Method:
+  p: 92.0%
+  q: 92.0%
+  r: 90.0%
+
+NR Method:
+  p: 92.0%
+  q: 92.0%
+  r: 90.0%
+
+NN Method:
+  p: 88.0%
+  q: 92.0%
+  r: 90.0%
+
+================================================================================
+POWER RESULTS (ability to detect difference from H0: p=0.241, q=0.069, r=0.690 (Dirichlet mean))
+================================================================================
+
+EM Method:
+  p: 74.0%
+  q: 76.0%
+  r: 72.0%
+
+NR Method:
+  p: 74.0%
+  q: 76.0%
+  r: 72.0%
+
+NN Method:
+  p: 74.0%
+  q: 74.0%
+  r: 72.0%

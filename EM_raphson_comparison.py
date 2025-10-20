@@ -112,16 +112,17 @@ def em_multiple_starts(n1, n2, n3, n4, starts=10, max_iter=1000, tol=1e-6):
     
     return best_params[0], best_params[1], best_params[2], best_likelihood, best_iterations
         
-def newton_raphson_abo(n1, n2, n3, n4, max_iter=100000, tol=1e-4):
-    
+def newton_raphson_abo(n1, n2, n3, n4, max_iter=100000, tol=1e-4, verbose=False):
+
     N = n1 + n2 + n3 + n4  # total individuals
 
-    # Initialize allele frequencies  
+    # Initialize allele frequencies
     p, q, r = initialize_freqs(n1, n2, n3, n4)
     lam = 2 * N  # Good lambda initialization
-    
+
     iterations = []
-    print(f"Debugged Newton-Raphson: n1={n1}, n2={n2}, n3={n3}, n4={n4}")
+    if verbose:
+        print(f"Debugged Newton-Raphson: n1={n1}, n2={n2}, n3={n3}, n4={n4}")
 
     for i in range(max_iter):
         # Bounds checking for numerical stability
@@ -145,7 +146,8 @@ def newton_raphson_abo(n1, n2, n3, n4, max_iter=100000, tol=1e-4):
         
         # Check convergence
         if F_norm < tol:
-            print(f"Converged in {i + 1} iterations (||F|| = {F_norm:.2e})")
+            if verbose:
+                print(f"Converged in {i + 1} iterations (||F|| = {F_norm:.2e})")
             break
         
         # Jacobian matrix
@@ -185,13 +187,14 @@ def newton_raphson_abo(n1, n2, n3, n4, max_iter=100000, tol=1e-4):
         # Solve Newton system with error handling
         try:
             cond_num = np.linalg.cond(jacobian)
-            if cond_num > 1e12:
+            if cond_num > 1e12 and verbose:
                 print(f"Warning: Ill-conditioned Jacobian (cond={cond_num:.2e})")
-            
+
             delta = np.linalg.solve(jacobian, -F)
-            
+
         except np.linalg.LinAlgError:
-            print(f"Singular Jacobian at iteration {i+1}")
+            if verbose:
+                print(f"Singular Jacobian at iteration {i+1}")
             # Fallback to gradient descent
             alpha = 0.001
             delta = -alpha * F
@@ -212,18 +215,20 @@ def newton_raphson_abo(n1, n2, n3, n4, max_iter=100000, tol=1e-4):
         lam += delta[3]
 
         # Print progress
-        if i < 15 or i % 10 == 0:
+        if verbose and (i < 15 or i % 10 == 0):
             print(f"{i+1}\t{p:.6f}\t{q:.6f}\t{r:.6f}\t{lam:.1f}\t\t{F_norm:.2e}\t{step_norm:.2e}")
 
         iterations.append((i+ 1, p, q, r, ll))
 
         # Secondary convergence check on step size
         if step_norm < tol:
-            print(f"Converged (step size) in {i + 1} iterations.")
+            if verbose:
+                print(f"Converged (step size) in {i + 1} iterations.")
             break
-            
+
     else:
-        print(f"Warning: Maximum iterations reached without convergence.")
+        if verbose:
+            print(f"Warning: Maximum iterations reached without convergence.")
     
     return p, q, r, iterations
 
