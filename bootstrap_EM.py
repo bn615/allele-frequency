@@ -130,7 +130,7 @@ def export_plots(results, output_dir, timestamp):
         r = results[param]
         boot_data = r['bootstrap_samples']
         
-        ax.hist(boot_data, bins=50, density=True, alpha=0.6, 
+        ax.hist(boot_data, bins=25, density=True, alpha=0.6, 
                color=color, edgecolor='black')
         ax.axvline(r['original'], color='red', linewidth=2, 
                   linestyle='--', label='Estimate')
@@ -194,7 +194,7 @@ def export_plots(results, output_dir, timestamp):
         
         # Top row: Histograms
         ax1 = axes[0, i]
-        ax1.hist(boot_data, bins=50, density=True, alpha=0.6, 
+        ax1.hist(boot_data, bins=25, density=True, alpha=0.6, 
                 color=color, edgecolor='black')
         ax1.axvline(r['original'], color='red', linewidth=2, linestyle='--')
         ax1.axvspan(r['ci_lower'], r['ci_upper'], alpha=0.2, color='yellow')
